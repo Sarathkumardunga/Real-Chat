@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 //import toast and its css for toast notification to be seen (line 4 and 5) 
 import {ToastContainer, toast} from "react-toastify";
@@ -9,6 +9,7 @@ import axios from "axios";
 import { registerRoute } from "../utils/APIRoutes";
 
 function Register(){
+  const navigate = useNavigate();
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -30,14 +31,24 @@ function Register(){
     event.preventDefault();
     if(handleValidation()){
       //if the validation is true , gonna call the API
-      //JUs to test if the api is being called correctly.
-      console.log("in validation", registerRoute);
-      const {password, confirmPassword, username, email} = values;
+      const {password, username, email} = values;
       const {data} = await axios.post(registerRoute, {
         username,
         email,
         password,
       });
+      //till abv we have destructured the data
+      if(data.status === false){
+        toast.error(data.msg, toastOptions);
+      }
+
+      if(data.status === true){
+        //if everything is correct then,
+        //we are storing the data of the user in string format and whenever we need it we can pass it as JSON string
+        localStorage.setItem('chat-app-user', JSON.stringify(data.user));
+        //and navigate to the chat container.
+        navigate("/");
+      } 
     }
   };
 
