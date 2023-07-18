@@ -26,6 +26,14 @@ function Register(){
     theme: "dark",
   };
 
+   //use effect hook
+   useEffect(() => {
+    //has to run only the first time the component is loaded
+    if(localStorage.getItem('chat-app-user')){
+      navigate('/')
+    }
+  },[]);
+
   //handle submit definition
   const handleSubmit = async (event) => {
     event.preventDefault();
