@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import axios from "axios";
+
 import { useNavigate } from "react-router-dom";
 import { allUsersRoute } from "../utils/APIRoutes";
 import Contacts from "../components/Contacts";
 import Welcome from "../components/Welcome";
+import ChatContainer from "../components/ChatContainer";
 
 function Chat() {
   const navigate = useNavigate();
@@ -52,9 +54,12 @@ function Chat() {
        currentUser={currentUser} 
        changeChat={handleChatChange}
       />
-      <Welcome 
+      {isLoaded && currentChat === undefined ?
+        <Welcome 
           currentUser={currentUser}
-      />
+        /> : 
+        <ChatContainer currentChat={currentChat} />
+      } 
     </div>
   </Container>
 }
