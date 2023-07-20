@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import styled from "styled-components";
 import Logout from "../components/Logout";
 import ChatInput from "../components/ChatInput";
-import Messages from "../components/Messages";
+//import Messages from "../components/Messages";
 import axios from "axios";
 import { getAllMessagesRoute,sendMessageRoute } from '../utils/APIRoutes';
 
@@ -100,6 +100,7 @@ overflow: hidden;
       }
     }
   }
+}
   .chat-messages {
     padding: 1rem 2rem;
     display: flex;
@@ -141,5 +142,5 @@ overflow: hidden;
       background-color: #9900ff20;
     }
   }    
-}
+
 `;
