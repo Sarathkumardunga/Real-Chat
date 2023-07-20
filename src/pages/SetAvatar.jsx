@@ -8,9 +8,9 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { setAvatarRoute } from "../utils/APIRoutes";
 import { Buffer } from 'buffer';
-export default function SetAvatar() {
 
-  const api = "https://api.multiavatar.com/45678945";
+export default function SetAvatar() {
+  const api = `https://api.multiavatar.com/4645646`;
   const navigate = useNavigate();
   const [avatars, setAvatars] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -56,7 +56,6 @@ export default function SetAvatar() {
       else {
         toast.error("Error setting avatar. Please try again.", toastOptions);
       }
-
     }
   };
 
@@ -78,6 +77,12 @@ export default function SetAvatar() {
 
   return(
     <>
+    {
+      isLoading ? <Container>
+        <img src={loader} alt="loader" className="loader" />
+      </Container> : (
+
+      
         <Container>
             <div className="title-container">
                 <h1>Pick an Avatar as your profile picture</h1>
@@ -85,27 +90,27 @@ export default function SetAvatar() {
 
             <div className="avatars">
                 {avatars.map((avatar, index) => {
-                    return (
-                        <div
-                            key = {index} 
-                            className={`avatar ${
-                                selectedAvatar === index ? "selected" : ""
-                            }`}
-                        >
-                            <img
-                                src={`data:image/svg+xml;base64,${avatar}`}
-                                alt="avatar"
-                                onClick={() => setSelectedAvatar(index)}
-                            />
-                        </div>
-                    );
+                  return (
+                    <div
+                        key = {index} 
+                        className={`avatar ${
+                            selectedAvatar === index ? "selected" : ""
+                        }`}
+                    >
+                        <img
+                            src={`data:image/svg+xml;base64,${avatar}`}
+                            alt="avatar"
+                            onClick={() => setSelectedAvatar(index)}
+                        />
+                    </div>
+                  );
               })} 
             </div>
             <button onClick={setProfilePicture} className="submit-btn">
             Set as Profile Picture
             </button>
         </Container>
-        ;
+        )}
         <ToastContainer />
     </>
   ); 

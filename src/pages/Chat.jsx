@@ -47,21 +47,23 @@ function Chat() {
     setCurrentChat(chat);
   };
 
-  return  <Container>
+  return  (
+  <Container>
     <div className="container">
       <Contacts 
        contacts={contacts}
        currentUser={currentUser} 
        changeChat={handleChatChange}
       />
-      {isLoaded && currentChat === undefined ?
+      {isLoaded && currentChat === undefined ? (
         <Welcome 
-          currentUser={currentUser}
-        /> : (
+          currentUser={currentUser}/>
+        ) : (
           <ChatContainer currentChat={currentChat} currentUser={currentUser} />
         )} 
     </div>
   </Container>
+  );
 }
 
 const Container = styled.div`
